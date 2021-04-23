@@ -9,6 +9,8 @@ import { BrowserRouter, Route } from "react-router-dom";
 import ContactEdit from "./ContactEdit";
 import Header from "./Header";
 import FireList from "./FireList";
+
+import FireDetail from "./FireDetail";
 // import Nov from "./Nov";
 
 //...
@@ -32,7 +34,7 @@ function App() {
         <Route path="/" exact component={Header} />
         <Route path="/adresar" component={FireList} />
         <Route path="/kontakt" exact component={ContactEdit} />
-        {/* <Route path="/kontakt/detalji" component={Nov} /> */}
+        <Route path="/kontakt/detalji" component={FireDetail} />
       </div>
     </BrowserRouter>
   );
