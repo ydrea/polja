@@ -1,26 +1,23 @@
 import React, { useState } from "react";
 import firebase from "./firebase";
 import Servis from "./funkc/servisni";
+import { _ } from "lodash";
+import useQueryString from "./funkc/useAhook";
+
 // import { Link } from "react-router-dom";
-// import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 
 export default function FireDetail() {
   const [item, setItem] = useState("");
+  const [quirky, funKy] = useQueryString("");
 
-  firebase
-    .firestore()
-    .collection("polja")
-    .get()
-    .then((snapshot) => {
-      console.log(snapshot);
-      // function ajD (){
-      if (!snapshot.empty) {
-        const data = snapshot.docs.map((doc) => {
-          const id = doc.id;
-          console.log(id);
-        });
-      }
-    });
+  firebase.firestore().collection("polja");
+  //
+  // .doc(doc.id)
+  // .get()
+  // .then((doc) => {
+  //   setItem(doc.data());
+  // });
 
   // const deleteItem = () => {
   //   Servis.db.remove(item);

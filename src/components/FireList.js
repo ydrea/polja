@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from "react";
 import firebase from "./firebase";
 import { Link, useParams } from "react-router-dom";
+import { _ } from "lodash";
 //
 const SORTER = {
   "Prezime A-Z": { column: "Prezime", direction: "asc" },
   "Prezime Z-A": { column: "Prezime", direction: "desc" },
   "Email A-Z": { column: "Kontakt", direction: "asc" },
 };
+const PAGER = {
+  15: { Max: "15" },
+  30: { Max: "30" },
+  45: { Max: "45" },
+};
 
 export default function FireList() {
   const [items, setItems] = useState([]);
+  const [ids, setIds] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sortBy, setSortBy] = useState("Prezime A-Z");
+  const [displayMax, setDisplayMax] = useState("15");
   const [query, setQuery] = useState();
 
   const ref = firebase
@@ -19,16 +27,19 @@ export default function FireList() {
     .collection("polja")
     // .orderBy("Kontakt")
     .orderBy(SORTER[sortBy].column, SORTER[sortBy].direction)
-    .limitToLast(15);
+    .limitToLast(PAGER[displayMax].column);
   // console.log(ref);
   function getEm() {
     setLoading(true);
     ref.onSnapshot((querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
-        items.push(doc.data());
+        const item = {
+          ...doc.data(),
+          id: doc.id,
+        };
+        items.push(item);
       });
-
       setItems(items);
       console.log(items);
       setLoading(false);
@@ -37,7 +48,7 @@ export default function FireList() {
 
   useEffect(() => {
     getEm();
-  }, [query, sortBy]);
+  }, [query, sortBy, displayMax]);
 
   return (
     <div>
@@ -53,6 +64,17 @@ export default function FireList() {
           <option value="Email A-Z"> Email A-Z </option>
         </select>
       </div>
+      <div>
+        <label> Max. po stranici </label>
+        <select
+          value={displayMax}
+          onChange={(e) => setDisplayMax(e.currentTarget.value)}
+        >
+          <option value="15">15</option>
+          <option value="30">30</option>
+          <option value="45">45</option>
+        </select>
+      </div>
       <ul>
         <input
           type="text"
@@ -61,15 +83,23 @@ export default function FireList() {
         ></input>
       </ul>
       {loading ? <h1>Loading...</h1> : null}
-      {items.map((i) => (
-        <div key={i.id}>
-          <h2>{i.id}</h2>
+
+      {items.map((val) => (
+        <div>
           <p>
-            {i.Ime} {i.Prezime}{" "}
-            <Link to={`/kontakt/detalji/{${i.id}}`}> ajd </Link>
+            {val.Ime} {val.Prezime}
+            <Link to={`/kontakt/detalji/{${val.id}}`}> ajd </Link>
           </p>
         </div>
       ))}
     </div>
   );
 }
+
+// const { data, desc } = this.state;
+// return (
+//    <div className="thatThingIAlwaysForgetToAddInReact">
+//      data.map((val, index) => <Well data={val} desc={desc[index]} key={index} onDelete={this.onDelete.bind(this)}/>
+//    </div>
+//  )
+// }

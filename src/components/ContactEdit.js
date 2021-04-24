@@ -87,15 +87,15 @@ class ContactEdit extends React.Component {
     return true;
   };
 
-  // displayFunction() {
-  //   var sampleDiv = document.getElementById("sh-ow");
-  //   sampleDiv.style.display = "block";
-  //   if (sampleDiv.style.display === "block") {
-  //     sampleDiv.style.display = "none";
-  //   } else {
-  //     sampleDiv.style.display = "block";
-  //   }
-  // }
+  displayFunction() {
+    var sampleDiv = document.getElementById("sh-ow");
+    sampleDiv.style.display = "block";
+    if (sampleDiv.style.display === "block") {
+      sampleDiv.style.display = "none";
+    } else {
+      sampleDiv.style.display = "block";
+    }
+  }
 
   render() {
     return (
