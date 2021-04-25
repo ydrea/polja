@@ -17,6 +17,7 @@ export default function FireDetail({ match }) {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           console.log(doc.id, " => ", doc.data());
+          console.log(JSON.stringify(doc.data()));
           setItem(doc.data());
           console.log(item);
         });
@@ -35,11 +36,12 @@ export default function FireDetail({ match }) {
 
   return (
     <div>
-      {/* {item.map((i) => {
-        <div>
-          {i.Ime} {i.Prezime} {i.Kontakt}
-        </div>;
-      })} */}
+      <p>
+        {item.Prezime}, {item.Ime}
+      </p>
+      <p> Rodjendan: {item.Datum}</p>
+
+      <p> Kontakt: {item.Kontakt}</p>
       <div>
         <button onClick={deleteItem}>Izbrisi</button>
         <button onClick={updateItem}>Azuriraj</button>
