@@ -1,25 +1,34 @@
-import React from "react";
-// import firebase from "../firebase";
-import { Link } from "react-router-dom";
-import FireDetail from "./FireDetail";
+import "./App.css";
+import firebase from "./firebase";
+import db from "./funkc/servisni";
+import React, { useState, useEffect } from "react";
 
-export default function FireItem({ item }) {
-  const [userDetails, setUserDetails] = useState("");
-  db.collection("users")
-    .doc(id)
-    .get()
-    .then((snapshot) => setUserDetails(snapshot.data()));
-
+function FireItem({ match }) {
+  const [blogs, setBlogs] = useState([]);
+  const fetchBlogs = async () => {
+    const response = db.collection("polja").where("id", "==", match.params.id);
+    console.log(response);
+    const data = await response.get();
+    data.docs.forEach((item) => {
+      setBlogs([...blogs, item.data()]);
+    });
+  };
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
   return (
-    <div>
-      <h6>
-        {item.Ime}, {item.Prezime} {item.id}, {item.Kontakt}
-      </h6>
-      <Link to={`/kontakt/detalji/{${item.id}}`}> ajd </Link>
-      <div style={{ display: "none" }}>
-        info
-        <FireDetail item={item} />
-      </div>
+    <div className="App">
+      {blogs &&
+        blogs.map((blog) => {
+          return (
+            <div className="blog-container">
+              <h4>{blog.Ime}</h4>
+              <p>{blog.Prezime}</p>
+            </div>
+          );
+        })}
     </div>
   );
 }
+
+export default FireItem;

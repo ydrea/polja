@@ -16,7 +16,7 @@ const PAGER = {
 
 export default function FireList() {
   const [items, setItems] = useState([]);
-  const [ids, setIds] = useState([]);
+  // const [ids, setIds] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sortBy, setSortBy] = useState("Prezime A-Z");
   const [displayMax, setDisplayMax] = useState("15");
@@ -85,21 +85,13 @@ export default function FireList() {
       {loading ? <h1>Loading...</h1> : null}
 
       {items.map((val) => (
-        <div>
+        <div key={val.id}>
           <p>
             {val.Ime} {val.Prezime}
-            <Link to={`/kontakt/detalji/{${val.id}}`}> ajd </Link>
+            <Link to={`/kontakt/detalji/${val.id}`}> ajd </Link>
           </p>
         </div>
       ))}
     </div>
   );
 }
-
-// const { data, desc } = this.state;
-// return (
-//    <div className="thatThingIAlwaysForgetToAddInReact">
-//      data.map((val, index) => <Well data={val} desc={desc[index]} key={index} onDelete={this.onDelete.bind(this)}/>
-//    </div>
-//  )
-// }

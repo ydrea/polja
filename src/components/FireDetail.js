@@ -1,40 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import firebase from "./firebase";
 import Servis from "./funkc/servisni";
-import { _ } from "lodash";
-import useQueryString from "./funkc/useAhook";
 
-// import { Link } from "react-router-dom";
-import { collection, query, where, getDocs } from "firebase/firestore";
+export default function FireDetail({ match }) {
+  // console.log(match);
+  // console.log(match.params.id);
+  const [item, setItem] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-export default function FireDetail() {
-  const [item, setItem] = useState("");
-  const [quirky, funKy] = useQueryString("");
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("polja")
+      .where("id", "==", match.params.id)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          console.log(doc.id, " => ", doc.data());
+          setItem(doc.data());
+          console.log(item);
+        });
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+  }, []);
 
-  firebase.firestore().collection("polja");
-  //
-  // .doc(doc.id)
-  // .get()
-  // .then((doc) => {
-  //   setItem(doc.data());
-  // });
+  const deleteItem = () => {
+    Servis.db.remove(item);
+  };
+  const updateItem = () => {
+    Servis.db.update(item);
+  };
 
-  // const deleteItem = () => {
-  //   Servis.db.remove(item);
-  // };
   return (
     <div>
+      {/* {item.map((i) => {
+        <div>
+          {i.Ime} {i.Prezime} {i.Kontakt}
+        </div>;
+      })} */}
       <div>
-        <ul>
-          nes
-          {/* <li>{item.Ime},</li>
-          {item.Prezime}, {item.Datum}, {item.Kontakt} */}
-        </ul>
-        to
+        <button onClick={deleteItem}>Izbrisi</button>
+        <button onClick={updateItem}>Azuriraj</button>
       </div>
-      {/* <button onClick={deleteItem}>Delete</button> */}
-
-      {/* <button onClick={updateItem}>Delete</button> */}
     </div>
   );
 }
