@@ -87,15 +87,15 @@ class ContactEdit extends React.Component {
     return true;
   };
 
-  displayFunction() {
-    var sampleDiv = document.getElementById("sh-ow");
-    sampleDiv.style.display = "block";
-    if (sampleDiv.style.display === "block") {
-      sampleDiv.style.display = "none";
-    } else {
-      sampleDiv.style.display = "block";
-    }
-  }
+  // displayFunction() {
+  //   var sampleDiv = document.getElementById("sh-ow");
+  //   sampleDiv.style.display = "block";
+  //   if (sampleDiv.style.display === "block") {
+  //     sampleDiv.style.display = "none";
+  //   } else {
+  //     sampleDiv.style.display = "block";
+  //   }
+  // }
 
   render() {
     return (
@@ -148,7 +148,7 @@ class ContactEdit extends React.Component {
                 {/* <button onClick={this.displayFunction}> Dalje </button> */}
               </div>
             </div>
-            <div Id="sh-ow">
+            <div>
               <div className="form-group">
                 <label htmlFor="kontakt">kontakt</label>
                 <input

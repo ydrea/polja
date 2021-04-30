@@ -1,3 +1,30 @@
+// const deleteItem = () => {
+//   firebase
+//     .firestore()
+//     .collection("polja")
+//     .where("id", "==", match.params.id)
+//     .doc(item.id)
+//     .delete()
+//     .catch((err) => {
+//       console.error(err);
+//     });
+// };
+
+// docRef.onSnapshot((doc) => {
+//   if (doc.exists) {
+//     console.log("Document data:", doc.data());
+//     setItem(doc.data());
+//   } else {
+//     // doc.data() will be undefined in this case
+//     console.log("No such document!");
+//   }
+// });
+// // <p> Kontakt: {item.Kontakt}</p>
+// // <div>
+//   {/* <button onClick={deleteItem}>Izbri si</button> */}
+//   {/* <button onClick={updateItem}>Azuriraj</button> */}
+// {/* </div> */}
+
 // const aref = firebase
 //   .firestore()
 //   .collection("polja")

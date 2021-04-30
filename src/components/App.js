@@ -11,8 +11,8 @@ import Header from "./Header";
 import FireList from "./FireList";
 
 import FireDetail from "./FireDetail";
-import FireItem from "./FireItem";
-// import Nov from "./Nov";
+// import FireItem from "./FireItem";
+import Formak from "./Formak";
 
 //...
 function App() {
@@ -30,7 +30,7 @@ function App() {
       <div className="App">
         login
         <div>
-          <Header />
+          <Formak />
         </div>
         <Route path="/" exact component={Header} />
         <Route path="/adresar" component={FireList} />
