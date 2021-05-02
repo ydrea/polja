@@ -2,6 +2,5 @@ node_modules
 App-tutor.js
 services
 AddItem.js
-ContactUpdate.js
 Item.js
 ItemsList.js

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "./firebase";
+import { Link } from "react-router-dom";
+import ContactUpdate from "./ContactUpdate";
 
 export default function FireDetail({ match }) {
   console.log(match);
@@ -43,6 +45,7 @@ export default function FireDetail({ match }) {
         <p>Datum rodjenja: {item.Datum}</p>
         {item.Prezime} {item.Ime}
       </div>
+      <ContactUpdate item={item} />
     </div>
   );
 }

@@ -11,11 +11,12 @@ import Header from "./Header";
 import FireList from "./FireList";
 
 import FireDetail from "./FireDetail";
-import Formak from "./Formak";
+// import Formak from "./Formak";
 
 import { AuthProvider } from "./auth/Auth";
 import Login from "./auth/Login";
 import Welcome from "./Welcome";
+// import ContactUpdate from "./ContactUpdate";
 
 //...
 function App() {

@@ -23,8 +23,6 @@ class ContactEdit extends React.Component {
     this.state = initialState;
   }
 
-  // db = firebase.firestore().collection("polja");
-
   onChangeIme(e) {
     this.setState({
       ime: e.target.value,
@@ -86,16 +84,6 @@ class ContactEdit extends React.Component {
 
     return true;
   };
-
-  // displayFunction() {
-  //   var sampleDiv = document.getElementById("sh-ow");
-  //   sampleDiv.style.display = "block";
-  //   if (sampleDiv.style.display === "block") {
-  //     sampleDiv.style.display = "none";
-  //   } else {
-  //     sampleDiv.style.display = "block";
-  //   }
-  // }
 
   render() {
     return (
