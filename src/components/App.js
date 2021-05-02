@@ -11,33 +11,33 @@ import Header from "./Header";
 import FireList from "./FireList";
 
 import FireDetail from "./FireDetail";
-// import FireItem from "./FireItem";
 import Formak from "./Formak";
+
+import { AuthProvider } from "./auth/Auth";
+import Login from "./auth/Login";
+import Welcome from "./Welcome";
 
 //...
 function App() {
   const ref = firebase.firestore().collection("polja");
-  // enableIndexedDbPersistence(db).catch((err) => {
-  //   if (err.code == "failed-precondition") {
-  //     // ...
-  //   } else if (err.code == "unimplemented") {
-  //     // ...
-  //   }
-  // });
-
+  //
   return (
-    <BrowserRouter>
-      <div className="App">
-        login
-        <div>
-          <Formak />
+    <AuthProvider>
+      <BrowserRouter>
+        <div className="App">
+          login
+          <div>
+            {/* <Formak /> */}
+            <Login />
+            <Welcome />
+          </div>
+          <Route path="/" exact component={Header} />
+          <Route path="/adresar" component={FireList} />
+          <Route path="/kontakt" exact component={ContactEdit} />
+          <Route path="/kontakt/detalji/:id" component={FireDetail} />
         </div>
-        <Route path="/" exact component={Header} />
-        <Route path="/adresar" component={FireList} />
-        <Route path="/kontakt" exact component={ContactEdit} />
-        <Route path="/kontakt/detalji/:id" component={FireDetail} />
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
