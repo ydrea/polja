@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import firebase from "./../firebase";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const register = () => {
+  const history = useHistory();
+
+  const login = () => {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -17,21 +20,20 @@ const Login = () => {
       });
   };
 
-  const login = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        resetInput();
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+  // const logOut = () => {
+  async function handleSubmit(event) {
+    event.preventDefault();
 
-  const logOut = () => {
-    firebase.auth().signOut();
-  };
+    try {
+      await login(email, password);
+      // userHasAuthenticated(true);
+      history.push("/adresar");
+    } catch (e) {
+      alert(e.message);
+    }
+  }
+  //   firebase.auth().signOut();
+  // };
 
   const resetInput = () => {
     setEmail("");
@@ -40,9 +42,7 @@ const Login = () => {
 
   return (
     <>
-      <h1>Login</h1>
       <div className="inputBox">
-        <h3>Login/Register</h3>
         <input
           type="email"
           value={email}
@@ -55,9 +55,8 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="password"
         />
-        <button onClick={register}>Register</button>
-        <button onClick={login}>Login</button>
-        <button onClick={logOut}>Log Out</button>
+        <button onClick={handleSubmit}>Login</button>
+        {/* <button onClick={logOut}>Log Out</button> */}
       </div>
     </>
   );

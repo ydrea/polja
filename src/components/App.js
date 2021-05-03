@@ -9,14 +9,11 @@ import { BrowserRouter, Route } from "react-router-dom";
 import ContactEdit from "./ContactEdit";
 import Header from "./Header";
 import FireList from "./FireList";
-
 import FireDetail from "./FireDetail";
-// import Formak from "./Formak";
+// import ContactUpdate from "./ContactUpdate";
 
 import { AuthProvider } from "./auth/Auth";
 import Login from "./auth/Login";
-import Welcome from "./Welcome";
-// import ContactUpdate from "./ContactUpdate";
 
 //...
 function App() {
@@ -28,11 +25,8 @@ function App() {
         <div className="App">
           login
           <div>
-            {/* <Formak /> */}
-            <Login />
-            <Welcome />
+            <Header />
           </div>
-          <Route path="/" exact component={Header} />
           <Route path="/adresar" component={FireList} />
           <Route path="/kontakt" exact component={ContactEdit} />
           <Route path="/kontakt/detalji/:id" component={FireDetail} />

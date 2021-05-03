@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import ContactUpdate from "./ContactUpdate";
 
 export default function FireDetail({ match }) {
-  console.log(match);
-  console.log(match.params.id);
+  // console.log(match);
+  // console.log(match.params.id);
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState();
 

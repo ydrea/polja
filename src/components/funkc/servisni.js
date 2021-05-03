@@ -2,7 +2,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 // import { enableIndexedDbPersistence } from "firebase/firestore";
 
-const ref = firebase.firestore().collection("polja");
+const db = firebase.firestore().collection("polja");
 
 // enableIndexedDbPersistence(ref).catch((err) => {
 //   if (err.code == "failed-precondition") {
@@ -10,30 +10,37 @@ const ref = firebase.firestore().collection("polja");
 //       }
 // });
 
-class Servis {
-  //promijeni
-  // //
-  // const updateItem = () => {
-  //   firebase
-  //     .firestore()
-  //     .collection("polja")
-  //     .where("id", "==", match.params.id)
-  //     // .doc(updatedItem.id)
-  //     // .update(updatedItem)
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
-
-  // dodaj
-  async addItem(newItem) {
-    ref
-      .doc(newItem.id)
-      .set(newItem)
-      .catch((err) => {
-        console.error(err);
-      });
-  }
+// dodaj async
+async function addItem(newItem) {
+  db.doc(newItem.id)
+    .set(newItem)
+    .catch((err) => {
+      console.error(err);
+    });
 }
+//promijeni
+// //
+const getAll = () => {
+  return db;
+};
 
-export default new Servis();
+const create = (data) => {
+  return db.add(data);
+};
+
+const update = (id, value) => {
+  return db.doc(id).update(value);
+};
+
+const remove = (id) => {
+  return db.doc(id).delete();
+};
+
+const Servis = {
+  getAll,
+  create,
+  update,
+  remove,
+};
+
+export default Servis;

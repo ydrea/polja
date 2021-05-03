@@ -1,60 +1,44 @@
 import Servis from "./funkc/servisni";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function ContactUpdate(props) {
   //
   console.log(props.item);
   //
   const initialState = {
-    id: null,
-    ime: "",
-    prezime: "",
-    imeError: "",
-    prezimeError: "",
-    date: "",
-    kontakt: "",
-    kontaktError: "",
-    published: false,
+    ime: props.item.Ime,
+    prezime: props.item.Prezime,
+    date: props.item.Datum,
+    kontakt: props.item.Kontakt,
   };
 
   const [theItem, setTheItem] = useState(initialState);
-  const [imeError, setImeError] = useState();
-  const [prezimeError, setPrezimeError] = useState();
   const [message, setMessage] = useState();
 
-  const { item } = props;
-  if (theItem.id !== item.id) {
+  console.log(theItem);
+
+  useEffect(() => {
+    const { item } = props;
     setTheItem(item);
-  }
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTheItem({ ...theItem, [name]: value });
+    console.log(theItem);
   };
 
-  const updatePublished = (status) => {
-    Servis.update(theItem.id0, { published: status })
-      .then(() => {
-        setTheItem({ ...theItem, published: status });
-        setMessage("The status was updated successfully!");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-
-  const updateItem = () => {
+  const updateItem = (theItem) => {
     let data = {
-      Ime: theItem.ime,
-      Prezime: theItem.prezime,
-      Kontakt: theItem.kontakt,
-      Datum: theItem.date,
-      published: true,
+      Ime: theItem.Ime,
+      Prezime: theItem.Prezime,
+      Kontakt: theItem.Kontakt,
+      Datum: theItem.Datum,
     };
 
     Servis.update(theItem.id, data)
       .then(() => {
-        setMessage("The tutorial was updated successfully!");
+        setMessage("Uspjesno ste izmijenili unos!");
       })
       .catch((e) => {
         console.log(e);
@@ -62,57 +46,17 @@ export default function ContactUpdate(props) {
   };
 
   const deleteItem = () => {
-    Servis.remove(theItem.id)
-      .then(() => {
-        props.refreshList();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    Servis.remove(theItem.id).catch((e) => {
+      console.log(e);
+    });
   };
-  // //
-  // const saveContact = () => {
-  //   let data = {
-  //     Ime: theItem.ime,
-  //     Prezime: theItem.prezime,
-  //     Kontakt: theItem.kontakt,
-  //     Datum: theItem.date,
-  //     published: true,
-  //   };
+  //
 
-  //   Servis.addItem(data)
-  //     .then(() => {
-  //       setState({
-  //         submitted: true,
-  //       });
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // };
-
-  const validate = () => {
-    let imeError = "";
-    let kontaktError = "";
-
-    if (!theItem.ime) {
-      imeError = "obavezan unos imena!";
-    }
-
-    if (!theItem.kontakt) {
-      imeError = "obavezan unos kontakta!";
-    }
-
-    if (kontaktError || imeError) {
-      this.setState({ kontaktError, imeError });
-      return false;
-    }
-
-    return true;
-  };
+  //
 
   return (
     <div className="container">
+      {console.log(("theItem", theItem))}
       {theItem ? (
         <div className="edit-form">
           <h4>Kontakt</h4>
@@ -122,7 +66,7 @@ export default function ContactUpdate(props) {
               <input
                 type="text"
                 className="form-control"
-                // id="title"
+                // id={theItem.id}
                 name="ime"
                 value={theItem.Ime}
                 onChange={handleInputChange}
@@ -133,7 +77,7 @@ export default function ContactUpdate(props) {
               <input
                 type="text"
                 className="form-control"
-                // id="description"
+                // id={theItem.id}
                 name="Prezime"
                 value={theItem.Prezime}
                 onChange={handleInputChange}
@@ -145,7 +89,7 @@ export default function ContactUpdate(props) {
               <input
                 type="text"
                 className="form-control"
-                // id="description"
+                // id={theItem.id}
                 name="Datum"
                 value={theItem.Datum}
                 onChange={handleInputChange}
@@ -156,25 +100,19 @@ export default function ContactUpdate(props) {
               <input
                 type="text"
                 className="form-control"
-                // id="description"
+                // id={theItem.id}
                 name="Kontakt"
                 value={theItem.Kontakt}
                 onChange={handleInputChange}
               />
             </div>
+
             <div className="form-group">
               <label>
                 <strong>Status:</strong>
               </label>
-              {theItem.published ? "Published" : "Pending"}
             </div>
           </form>
-
-          {theItem.published ? (
-            <button onClick={() => updatePublished(false)}>UnPublish</button>
-          ) : (
-            <button onClick={() => updatePublished(true)}>Publish</button>
-          )}
 
           <button onClick={deleteItem}>Delete</button>
 
@@ -186,7 +124,7 @@ export default function ContactUpdate(props) {
       ) : (
         <div>
           <br />
-          <p>Please click on a Tutorial...</p>
+          <p>Odaberi jedan broj...</p>
         </div>
       )}{" "}
     </div>

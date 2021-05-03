@@ -5,7 +5,7 @@ const Welcome = () => {
   const { currentUser } = useContext(AuthContext);
   const currentUserEmail = currentUser ? currentUser.email : "";
 
-  return <h2>{`Welcome ${currentUserEmail}`}</h2>;
+  return <div>{`Welcome ${currentUserEmail}`}</div>;
 };
 
 export default Welcome;
