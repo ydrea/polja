@@ -5,16 +5,19 @@ import ContactUpdate from "./ContactUpdate";
 
 export default function FireDetail({ match }) {
   // console.log(match);
-  // console.log(match.params.id);
+  console.log(match.params.id);
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState();
+
+  const theId = match.params.id;
+  console.log(theId);
 
   const getIt = () => {
     setLoading(true);
     const docRef = firebase
       .firestore()
       .collection("polja")
-      .doc(match.params.id)
+      .doc(theId)
       .get()
       .then((doc) => {
         setItem(doc.data());
@@ -43,9 +46,9 @@ export default function FireDetail({ match }) {
       </div>
       <div>
         <p>Datum rodjenja: {item.Datum}</p>
-        {item.Prezime} {item.Ime}
+        {item.Prezime} {item.Ime} {theId}
       </div>
-      <ContactUpdate item={item} />
+      <ContactUpdate item={item} Id={theId} />
     </div>
   );
 }

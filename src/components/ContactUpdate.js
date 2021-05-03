@@ -2,24 +2,19 @@ import Servis from "./funkc/servisni";
 import React, { useState, useEffect } from "react";
 
 export default function ContactUpdate(props) {
-  //
-  console.log(props.item);
-  //
   const initialState = {
     ime: props.item.Ime,
     prezime: props.item.Prezime,
-    date: props.item.Datum,
+    datum: props.item.Datum,
     kontakt: props.item.Kontakt,
+    id: props.Id,
   };
 
-  const [theItem, setTheItem] = useState(initialState);
+  const [theItem, setTheItem] = useState();
   const [message, setMessage] = useState();
 
-  console.log(theItem);
-
   useEffect(() => {
-    const { item } = props;
-    setTheItem(item);
+    setTheItem(props.item);
   }, []);
 
   const handleInputChange = (event) => {
@@ -30,10 +25,10 @@ export default function ContactUpdate(props) {
 
   const updateItem = (theItem) => {
     let data = {
-      Ime: theItem.Ime,
-      Prezime: theItem.Prezime,
-      Kontakt: theItem.Kontakt,
-      Datum: theItem.Datum,
+      ime: theItem.ime,
+      prezime: theItem.prezime,
+      kontakt: theItem.kontakt,
+      datum: theItem.datum,
     };
 
     Servis.update(theItem.id, data)
@@ -50,13 +45,10 @@ export default function ContactUpdate(props) {
       console.log(e);
     });
   };
-  //
-
-  //
 
   return (
     <div className="container">
-      {console.log(("theItem", theItem))}
+      {console.log(("theItem", props, theItem))}
       {theItem ? (
         <div className="edit-form">
           <h4>Kontakt</h4>
@@ -66,18 +58,16 @@ export default function ContactUpdate(props) {
               <input
                 type="text"
                 className="form-control"
-                // id={theItem.id}
-                name="ime"
+                name="Ime"
                 value={theItem.Ime}
                 onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Prezime">Prezime</label>
+              <label htmlFor="prezime">Prezime</label>
               <input
                 type="text"
                 className="form-control"
-                // id={theItem.id}
                 name="Prezime"
                 value={theItem.Prezime}
                 onChange={handleInputChange}
@@ -85,22 +75,20 @@ export default function ContactUpdate(props) {
             </div>
 
             <div className="form-group">
-              <label htmlFor="Datum">Datum</label>
+              <label htmlFor="datum">Datum</label>
               <input
                 type="text"
                 className="form-control"
-                // id={theItem.id}
                 name="Datum"
                 value={theItem.Datum}
                 onChange={handleInputChange}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Kontakt">Kontakt</label>
+              <label htmlFor="kontakt">Kontakt</label>
               <input
                 type="text"
                 className="form-control"
-                // id={theItem.id}
                 name="Kontakt"
                 value={theItem.Kontakt}
                 onChange={handleInputChange}
