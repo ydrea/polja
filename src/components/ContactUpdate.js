@@ -45,9 +45,14 @@ export default function ContactUpdate(props) {
   };
 
   const deleteItem = () => {
-    Servis.remove(theItem.id).catch((e) => {
-      console.log(e);
-    });
+    Servis.remove(theItem.id)
+
+      .then(() => {
+        setMessage("Uspjesno ste uklonili unos!");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -107,6 +112,7 @@ export default function ContactUpdate(props) {
           </form>
 
           <button onClick={deleteItem}>Delete</button>
+          <p>{message}</p>
 
           <button type="submit" onClick={updateItem}>
             Update
