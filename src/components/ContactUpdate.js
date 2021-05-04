@@ -7,6 +7,7 @@ export default function ContactUpdate(props) {
     prezime: props.item.Prezime,
     datum: props.item.Datum,
     kontakt: props.item.Kontakt,
+    published: props.item.Published,
     id: props.Id,
   };
 
@@ -15,20 +16,23 @@ export default function ContactUpdate(props) {
 
   useEffect(() => {
     setTheItem(props.item);
+    console.log(theItem);
   }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTheItem({ ...theItem, [name]: value });
-    console.log(theItem);
+    console.log(theItem, props.Id);
   };
 
   const updateItem = (theItem) => {
     let data = {
-      ime: theItem.ime,
-      prezime: theItem.prezime,
-      kontakt: theItem.kontakt,
-      datum: theItem.datum,
+      Ime: theItem.Ime,
+      Prezime: theItem.Prezime,
+      Kontakt: theItem.Kontakt,
+      Datum: theItem.Datum,
+      Published: true,
+      Id: theItem.id,
     };
 
     Servis.update(theItem.id, data)
@@ -48,13 +52,13 @@ export default function ContactUpdate(props) {
 
   return (
     <div className="container">
-      {console.log(("theItem", props, theItem))}
+      {console.log(("theItem", props.Id, theItem))}
       {theItem ? (
         <div className="edit-form">
           <h4>Kontakt</h4>
           <form>
             <div className="form-group">
-              <label htmlFor="ime">Ime</label>
+              <label htmlFor="Ime">Ime</label>
               <input
                 type="text"
                 className="form-control"
@@ -64,7 +68,7 @@ export default function ContactUpdate(props) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="prezime">Prezime</label>
+              <label htmlFor="Prezime">Prezime</label>
               <input
                 type="text"
                 className="form-control"
@@ -75,7 +79,7 @@ export default function ContactUpdate(props) {
             </div>
 
             <div className="form-group">
-              <label htmlFor="datum">Datum</label>
+              <label htmlFor="Datum">Datum</label>
               <input
                 type="text"
                 className="form-control"
@@ -85,7 +89,7 @@ export default function ContactUpdate(props) {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="kontakt">Kontakt</label>
+              <label htmlFor="Kontakt">Kontakt</label>
               <input
                 type="text"
                 className="form-control"
