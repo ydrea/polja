@@ -22,20 +22,20 @@ export default function ContactUpdate(props) {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTheItem({ ...theItem, [name]: value });
-    console.log(theItem, props.Id);
+    console.log(theItem, props.id);
   };
 
-  const updateItem = (theItem) => {
+  const updateItem = () => {
     let data = {
       Ime: theItem.Ime,
       Prezime: theItem.Prezime,
       Kontakt: theItem.Kontakt,
       Datum: theItem.Datum,
-      Published: true,
-      Id: theItem.id,
+      published: true,
+      id: props.id,
     };
 
-    Servis.update(theItem.id, data)
+    Servis.update(props.id, data)
       .then(() => {
         setMessage("Uspjesno ste izmijenili unos!");
       })
@@ -45,7 +45,7 @@ export default function ContactUpdate(props) {
   };
 
   const deleteItem = () => {
-    Servis.remove(theItem.id)
+    Servis.remove(props.id)
 
       .then(() => {
         setMessage("Uspjesno ste uklonili unos!");
@@ -57,7 +57,7 @@ export default function ContactUpdate(props) {
 
   return (
     <div className="container">
-      {console.log(("theItem", props.Id, theItem))}
+      {console.log(("theItem", props.id, theItem))}
       {theItem ? (
         <div className="edit-form">
           <h4>Kontakt</h4>

@@ -48,7 +48,7 @@ export default function FireDetail({ match }) {
         <p>Datum rodjenja: {item.Datum}</p>
         {item.Prezime} {item.Ime} {theId}
       </div>
-      <ContactUpdate item={item} Id={theId} />
+      <ContactUpdate item={item} id={theId} />
     </div>
   );
 }
