@@ -9,6 +9,7 @@ const initialState = {
   date: "",
   kontakt: "",
   kontaktError: "",
+  daLje: false,
 };
 
 class ContactEdit extends React.Component {
@@ -19,6 +20,7 @@ class ContactEdit extends React.Component {
     this.onChangeDate = this.onChangeDate.bind(this);
     this.onChangeKontakt = this.onChangeKontakt.bind(this);
     this.saveContact = this.saveContact.bind(this);
+    this.onChangeDalje = this.onChangeDalje.bind(this);
 
     this.state = initialState;
   }
@@ -39,6 +41,14 @@ class ContactEdit extends React.Component {
       date: e.target.value,
     });
   }
+
+  onChangeDalje(e) {
+    console.log("dalje");
+    this.setState({
+      daLje: e.target.checked,
+    });
+  }
+
   onChangeKontakt(e) {
     this.setState({
       kontakt: e.target.value,
@@ -129,35 +139,43 @@ class ContactEdit extends React.Component {
                   id="date"
                   value={this.state.date}
                   onChange={this.onChangeDate}
-                  name="prezime"
+                  name="date"
                 />
               </div>
-              <div></div>
-            </div>
-            <div>
-              <div className="form-group">
-                <label htmlFor="kontakt">kontakt</label>
+              <div>
                 <input
-                  type="text"
-                  className="form-control"
-                  id="kontakt"
-                  required
-                  value={this.state.kontakt}
-                  onChange={this.onChangeKontakt}
-                  name="kontakt"
+                  type="checkbox"
+                  checked={this.state.daLje}
+                  onChange={this.onChangeDalje}
                 />
-                <select>
-                  <option> Email </option>
-                  <option> Telefon </option>
-                  <option> Mobitel </option>
-                  <option> Pager </option>
-                </select>
               </div>
-
-              <button onClick={this.saveContact} className="btn btn-success">
-                Submit
-              </button>
             </div>
+            {this.state.daLje ? (
+              <div>
+                <div className="form-group">
+                  <label htmlFor="kontakt">kontakt</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="kontakt"
+                    required
+                    value={this.state.kontakt}
+                    onChange={this.onChangeKontakt}
+                    name="kontakt"
+                  />
+                  <select>
+                    <option> Email </option>
+                    <option> Telefon </option>
+                    <option> Mobitel </option>
+                    <option> Pager </option>
+                  </select>
+                </div>
+
+                <button onClick={this.saveContact} className="btn btn-success">
+                  Submit
+                </button>
+              </div>
+            ) : null}
           </div>
         )}
       </div>
