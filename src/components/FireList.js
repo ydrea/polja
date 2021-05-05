@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "./firebase";
 import { Link, useParams } from "react-router-dom";
-import { _ } from "lodash";
+import { Icon } from "semantic-ui-react";
 
 //
 const SORTER = {
@@ -10,16 +10,16 @@ const SORTER = {
   "Email A-Z": { column: "Kontakt", direction: "asc" },
 };
 const PAGER = {
-  5: { Max: "5" },
-  30: { Max: "30" },
-  45: { Max: "45" },
+  "max 5": { Max: "5" },
+  "max 30": { Max: "30" },
+  "max 45": { Max: "45" },
 };
 
 export default function FireList() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sortBy, setSortBy] = useState("Prezime A-Z");
-  const [displayMax, setDisplayMax] = useState("5");
+  const [displayMax, setDisplayMax] = useState("max 5");
   const [query, setQuery] = useState("");
 
   // function routeTo() {
@@ -49,6 +49,10 @@ export default function FireList() {
     });
   }
 
+  const addToFavorites = () => {
+    console.log("fav");
+  };
+
   useEffect(() => {
     getEm();
   }, [query, sortBy, displayMax]);
@@ -73,9 +77,9 @@ export default function FireList() {
           value={displayMax}
           onChange={(e) => setDisplayMax(e.currentTarget.value)}
         >
-          <option value="5">5</option>
-          <option value="30">30</option>
-          <option value="45">45</option>
+          <option value="max 5">5</option>
+          <option value="max 30">30</option>
+          <option value="max 45">45</option>
         </select>
       </div>
       <ul>
@@ -90,6 +94,7 @@ export default function FireList() {
       {items.map((val) => (
         <div key={val.id}>
           <p>
+            {<Icon classname="star outline" onclick={addToFavorites()} />}
             {val.Ime} {val.Prezime}
             <Link to={`/kontakt/detalji/${val.id}`}> ajd </Link>
           </p>

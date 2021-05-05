@@ -43,7 +43,7 @@ class ContactEdit extends React.Component {
   }
 
   onChangeDalje(e) {
-    console.log("dalje");
+    // console.log("dalje");
     this.setState({
       daLje: e.target.checked,
     });
