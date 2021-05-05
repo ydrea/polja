@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import firebase from "./firebase";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import ContactUpdate from "./ContactUpdate";
 
 export default function FireDetail({ match }) {
   // console.log(match);
-  console.log(match.params.id);
+  // console.log(match.params.id);
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState();
 
   const theId = match.params.id;
-  console.log(theId);
+  // console.log(theId);
 
   const getIt = () => {
     setLoading(true);
@@ -23,7 +23,7 @@ export default function FireDetail({ match }) {
         setItem(doc.data());
       });
     //
-    console.log(docRef);
+    // console.log(docRef);
     //
     // const docRef = firebase.firestore().collection("polja").doc("documentId")
     //
@@ -40,7 +40,7 @@ export default function FireDetail({ match }) {
   return (
     <div className="container">
       <div>
-        {console.log("item: ", item)}
+        {/* {console.log("item: ", item)} */}
         Kontakt: tip - email
         <p> {item.Kontakt}</p>
       </div>

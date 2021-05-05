@@ -132,9 +132,7 @@ class ContactEdit extends React.Component {
                   name="prezime"
                 />
               </div>
-              <div>
-                {/* <button onClick={this.displayFunction}> Dalje </button> */}
-              </div>
+              <div></div>
             </div>
             <div>
               <div className="form-group">
