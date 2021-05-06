@@ -1,3 +1,26 @@
+// const reFav = firebase
+//   .firestore()
+//   .collection("polja")
+//   .where("published", "==", true);
+// function getFavs() {
+//   // setLoading(true);
+//   ref.get().then((querySnapshot) => {
+//     const favorites = [];
+//     querySnapshot.forEach((doc) => {
+//       setFavorites(favorite);
+//     });
+//   });
+// }
+
+// const addToFavorites = () => {
+//   console.log("fav");
+//   setFavorite(favorite);
+// };
+
+// useEffect(() => {
+//   getFavs();
+// }, [favorite]);
+
 // const deleteItem = () => {
 //   firebase
 //     .firestore()

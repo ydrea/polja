@@ -64,7 +64,7 @@ class ContactEdit extends React.Component {
       published: true,
     };
 
-    Servis.addItem(data)
+    Servis.create(data)
       .then(() => {
         this.setState({
           submitted: true,

@@ -8,21 +8,30 @@ export default function ContactUpdate(props) {
     datum: props.item.Datum,
     kontakt: props.item.Kontakt,
     published: props.item.Published,
-    id: props.Id,
+    id: props.id,
   };
+  console.log(props);
 
   const [theItem, setTheItem] = useState();
   const [message, setMessage] = useState();
+  const [daLje, setDalje] = useState();
 
   useEffect(() => {
     setTheItem(props.item);
     console.log(theItem);
-  }, []);
+  }, [daLje]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTheItem({ ...theItem, [name]: value });
     console.log(theItem, props.id);
+  };
+
+  const handleDalje = (e) => {
+    // console.log("dalje");
+    setDalje({
+      daLje: e.target.checked,
+    });
   };
 
   const updateItem = () => {
@@ -86,13 +95,15 @@ export default function ContactUpdate(props) {
             <div className="form-group">
               <label htmlFor="Datum">Datum</label>
               <input
-                type="text"
+                type="date"
                 className="form-control"
                 name="Datum"
                 value={theItem.Datum}
                 onChange={handleInputChange}
               />
             </div>
+            <input type="checkbox" checked={daLje} onChange={handleDalje} />
+
             <div className="form-group">
               <label htmlFor="Kontakt">Kontakt</label>
               <input
@@ -104,10 +115,8 @@ export default function ContactUpdate(props) {
               />
             </div>
 
-            <div className="form-group">
-              <label>
-                <strong>Status:</strong>
-              </label>
+            <div className="form-group" value={theItem.Published}>
+              <label>Status: </label>
             </div>
           </form>
 

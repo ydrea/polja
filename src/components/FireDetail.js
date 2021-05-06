@@ -23,9 +23,6 @@ export default function FireDetail({ match }) {
         setItem(doc.data());
       });
     //
-    // console.log(docRef);
-    //
-    // const docRef = firebase.firestore().collection("polja").doc("documentId")
     //
     setLoading(false);
   };
