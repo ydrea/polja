@@ -20,9 +20,9 @@ async function addItem(newItem) {
 }
 //promijeni
 // //
-// const getAll = () => {
-//   return db;
-// };
+const getAll = () => {
+  return db;
+};
 
 const create = (data) => {
   return db.add(data);
@@ -37,7 +37,7 @@ const remove = (id) => {
 };
 
 const Servis = {
-  // getAll,
+  getAll,
   create,
   update,
   remove,

@@ -9,6 +9,7 @@ const initialState = {
   date: "",
   kontakt: "",
   kontaktError: "",
+  favorite: false,
   daLje: false,
 };
 
@@ -61,7 +62,7 @@ class ContactEdit extends React.Component {
       Prezime: this.state.prezime,
       Kontakt: this.state.kontakt,
       Datum: this.state.date,
-      published: true,
+      favorite: true,
     };
 
     Servis.create(data)

@@ -7,7 +7,7 @@ export default function ContactUpdate(props) {
     prezime: props.item.Prezime,
     datum: props.item.Datum,
     kontakt: props.item.Kontakt,
-    published: props.item.Published,
+    favorite: props.item.favorite,
     id: props.id,
   };
   console.log(props);
@@ -40,7 +40,7 @@ export default function ContactUpdate(props) {
       Prezime: theItem.Prezime,
       Kontakt: theItem.Kontakt,
       Datum: theItem.Datum,
-      published: true,
+      favorite: theItem.favorite,
       id: props.id,
     };
 
@@ -66,7 +66,7 @@ export default function ContactUpdate(props) {
 
   return (
     <div className="container">
-      {console.log(("theItem", props.id, theItem))}
+      {/* {console.log(("theItem", props.id, theItem))} */}
       <input type="checkbox" checked={daLje} onChange={handleDalje} />
       {daLje ? (
         <div className="edit-form">
@@ -115,7 +115,7 @@ export default function ContactUpdate(props) {
               />
             </div>
 
-            <div className="form-group" value={theItem.Published}>
+            <div className="form-group" value={theItem.favorite}>
               <label>Status: </label>
             </div>
           </form>

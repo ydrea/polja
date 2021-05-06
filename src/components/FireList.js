@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import firebase from "./firebase";
 import { Link, useParams } from "react-router-dom";
-import { Icon } from "semantic-ui-react";
+import { Checkbox } from "semantic-ui-react";
 import Servis from "./funkc/servisni";
 
-//
 const SORTER = {
   "Prezime A-Z": { column: "Prezime", direction: "asc" },
   "Prezime Z-A": { column: "Prezime", direction: "desc" },
@@ -22,19 +21,12 @@ export default function FireList() {
   const [sortBy, setSortBy] = useState("Prezime A-Z");
   const [displayMax, setDisplayMax] = useState("max 5");
   const [query, setQuery] = useState("");
-  // const [favorites, setFavorites] = useState([]);
-  const [favorite, setFavorite] = useState([]);
-
-  // function routeTo() {
-  //   const { id } = useParams();
-  // }
 
   const ref = firebase
     .firestore()
     .collection("polja")
     .orderBy(SORTER[sortBy].column, SORTER[sortBy].direction)
     .limitToLast(PAGER[displayMax].column);
-  // console.log(ref);
   function getEm() {
     setLoading(true);
     ref.get().then((querySnapshot) => {
@@ -55,8 +47,21 @@ export default function FireList() {
     getEm();
   }, [query, sortBy, displayMax]);
 
-  const handleClick = (id) => {
-    console.log(favorite, id);
+  const addFav = (val) => {
+    val.published = !val.published;
+    let tmp = items.filter((item) => item.id !== val.id);
+    console.log(tmp);
+    tmp.push(val);
+    console.log(val);
+    setItems(tmp);
+
+    Servis.update(val)
+      .then(() => {
+        console.log("ok");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -92,24 +97,22 @@ export default function FireList() {
         ></input>
       </ul>
       {loading ? <h1>Loading...</h1> : null}
-
       {items.map((val) => (
         <div key={val.id}>
           <p>
             {
               <input
                 type="checkbox"
-                checked={val.published}
-                //
-                onChange={(e) => handleClick(e.target.checked)}
-                //
+                value={val.published}
+                onChange={() => addFav(val)}
               />
             }
-            {val.Ime} {val.Prezime}
+            {val.Ime} {val.Prezime} {val.favorite}
             <Link to={`/kontakt/detalji/${val.id}`}> ajd </Link>
           </p>
         </div>
       ))}
+      =====
     </div>
   );
 }

@@ -37,7 +37,7 @@ export default function FireDetail({ match }) {
   return (
     <div className="container">
       <div>
-        {/* {console.log("item: ", item)} */}
+        {console.log("item: ", item)}
         Kontakt: tip - email
         <p> {item.Kontakt}</p>
       </div>
