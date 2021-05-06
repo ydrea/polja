@@ -67,7 +67,8 @@ export default function ContactUpdate(props) {
   return (
     <div className="container">
       {console.log(("theItem", props.id, theItem))}
-      {theItem ? (
+      <input type="checkbox" checked={daLje} onChange={handleDalje} />
+      {daLje ? (
         <div className="edit-form">
           <h4>Kontakt</h4>
           <form>
@@ -102,7 +103,6 @@ export default function ContactUpdate(props) {
                 onChange={handleInputChange}
               />
             </div>
-            <input type="checkbox" checked={daLje} onChange={handleDalje} />
 
             <div className="form-group">
               <label htmlFor="Kontakt">Kontakt</label>
