@@ -10,6 +10,7 @@ import ContactEdit from "./ContactEdit";
 import Header from "./Header";
 import FireList from "./FireList";
 import FireDetail from "./FireDetail";
+import Omiljeni from "./Omiljeni";
 // import ContactUpdate from "./ContactUpdate";
 
 import { AuthProvider } from "./auth/Auth";
@@ -30,6 +31,7 @@ function App() {
           <Route path="/adresar" component={FireList} />
           <Route path="/kontakt" exact component={ContactEdit} />
           <Route path="/kontakt/detalji/:id" component={FireDetail} />
+          <Route path="/omiljeni" component={Omiljeni} />
         </div>
       </BrowserRouter>
     </AuthProvider>

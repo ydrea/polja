@@ -32,6 +32,9 @@ export default function Header() {
           <div>
             <Link to="/adresar">Adresar</Link>
           </div>
+          <div>
+            <Link to="/omiljeni">Omiljeni</Link>
+          </div>
         </div>
       ) : (
         <Login />

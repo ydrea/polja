@@ -6,61 +6,22 @@ export default function Search({ items }) {
   console.log(items);
   //search
   const handleSearch = (event) => {
+    // event.preventDefault();
     setSearchTerm(event.target.value);
   };
+  //
+  if (searchTerm > 0) {
+    items = items.filter((i) => {
+      return i.name.match(searchTerm);
+    });
+  }
+  //
+  // const seaRch = (items) => {
+  //   let tmp = searchResults.filter((items) => items.includes(searchTerm));
+  //   console.log(tmp);
+  //   setSearchResults(items);
+  // };
   // //
-  //   const seaRch = (items) => {
-  //     let tmp = searchResults.filter((val) => val.includes(searchTerm));
-  //     console.log(tmp);
-  //   };
-  // //
-
-  //   import SourceData from "./SourceData.json";
-
-  //   class App extends React.Component {
-  //     state = {
-  //       value: "",
-  //       sourceData: SourceData,
-  //       filterData: []
-  //     };
-
-  //     handleChange = e => {
-  //       this.setState({
-  //         filterData: this.state.sourceData
-  //       });
-  //     };
-
-  //     filterList = e => {
-  //       const updatedList = this.state.sourceData.filter(item => {
-  //         return (
-  //           item.continent.toLowerCase().search(e.target.value.toLowerCase()) !== -1
-  //         );
-  //       });
-  //       this.setState({ filterData: updatedList });
-  //     };
-
-  //     render() {
-  //       const searchBox = (
-  //         <input
-  //           type="text"
-  //           onClick={this.handleChange}
-  //           onChange={this.filterList}
-  //         />
-  //       );
-  //       const selectBox = this.state.filterData.map(option => (
-  //         <li key={option.continent}>{option.continent}</li>
-  //       ));
-
-  //       return (
-  //         <React.Fragment>
-  //           <h2>Step 1</h2>
-  //           <h3>Select a continent.</h3>
-  //           {searchBox}
-  //           {selectBox && <ul>{selectBox}</ul>}
-  //         </React.Fragment>
-  //       );
-  //     }
-  //   }
 
   // //
 
@@ -74,6 +35,7 @@ export default function Search({ items }) {
       <ul>
         <input
           type="text"
+          placeholder="Trazi"
           name="search"
           value={searchTerm}
           onChange={handleSearch}
