@@ -27,7 +27,7 @@ export default function FireList() {
     .firestore()
     .collection("polja")
     .orderBy(SORTER[sortBy].column, SORTER[sortBy].direction)
-    .limit(PAGER[displayMax].column);
+    .limit(PAGER[displayMax].Max);
   //
   function getEm() {
     setLoading(true);
@@ -105,7 +105,7 @@ export default function FireList() {
               <input
                 type="checkbox"
                 value={val.published}
-                onChange={() => addFav(val)}
+                onChange={() => addFav.toString(val)}
               />
             }
             {val.Ime} {val.Prezime} {val.favorite}
