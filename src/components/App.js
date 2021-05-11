@@ -18,7 +18,7 @@ import Login from "./auth/Login";
 //...
 function App() {
   const ref = firebase.firestore().collection("polja");
-  //
+
   return (
     <AuthProvider>
       <BrowserRouter>

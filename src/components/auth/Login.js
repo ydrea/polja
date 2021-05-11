@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const history = useHistory();
 
   const login = () => {
@@ -26,7 +25,6 @@ const Login = () => {
 
     try {
       await login(email, password);
-      // userHasAuthenticated(true);
       history.push("/adresar");
     } catch (e) {
       alert(e.message);

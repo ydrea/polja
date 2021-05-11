@@ -3,6 +3,7 @@ import firebase from "./firebase";
 import { Link, useParams } from "react-router-dom";
 import { Checkbox } from "semantic-ui-react";
 import Servis from "./funkc/servisni";
+import Search from "./Search";
 
 const SORTER = {
   "Prezime A-Z": { column: "Prezime", direction: "asc" },
@@ -20,13 +21,14 @@ export default function FireList() {
   const [loading, setLoading] = useState(false);
   const [sortBy, setSortBy] = useState("Prezime A-Z");
   const [displayMax, setDisplayMax] = useState("max 5");
-  const [query, setQuery] = useState("");
 
+  //list
   const ref = firebase
     .firestore()
     .collection("polja")
     .orderBy(SORTER[sortBy].column, SORTER[sortBy].direction)
-    .limitToLast(PAGER[displayMax].column);
+    .limit(PAGER[displayMax].column);
+  //
   function getEm() {
     setLoading(true);
     ref.get().then((querySnapshot) => {
@@ -39,14 +41,11 @@ export default function FireList() {
         items.push(item);
       });
       setItems(items);
+      console.log(items);
       setLoading(false);
     });
   }
-
-  useEffect(() => {
-    getEm();
-  }, [query, sortBy, displayMax]);
-
+  //favorite
   const addFav = (val) => {
     val.published = !val.published;
     let tmp = items.filter((item) => item.id !== val.id);
@@ -57,12 +56,21 @@ export default function FireList() {
 
     Servis.update(val)
       .then(() => {
-        console.log("ok");
+        console.log("kontakt dodan u omiljene");
       })
       .catch((e) => {
         console.log(e);
       });
   };
+
+  //search
+
+  //
+  useEffect(() => {
+    getEm();
+  }, [sortBy, displayMax]);
+
+  // //
 
   return (
     <div>
@@ -89,13 +97,6 @@ export default function FireList() {
           <option value="max 45">45</option>
         </select>
       </div>
-      <ul>
-        <input
-          type="text"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        ></input>
-      </ul>
       {loading ? <h1>Loading...</h1> : null}
       {items.map((val) => (
         <div key={val.id}>
@@ -112,7 +113,8 @@ export default function FireList() {
           </p>
         </div>
       ))}
-      =====
+
+      <Search items={items} />
     </div>
   );
 }

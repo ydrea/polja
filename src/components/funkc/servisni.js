@@ -2,7 +2,7 @@ import firebase from "firebase";
 import "firebase/firestore";
 // import { enableIndexedDbPersistence } from "firebase/firestore";
 
-const db = firebase.firestore().collection("polja");
+const ref = firebase.firestore().collection("polja");
 
 // enableIndexedDbPersistence(ref).catch((err) => {
 //   if (err.code == "failed-precondition") {
@@ -12,7 +12,8 @@ const db = firebase.firestore().collection("polja");
 
 // dodaj async
 async function addItem(newItem) {
-  db.doc(newItem.id)
+  ref
+    .doc(newItem.id)
     .set(newItem)
     .catch((err) => {
       console.error(err);
@@ -21,19 +22,19 @@ async function addItem(newItem) {
 //promijeni
 // //
 const getAll = () => {
-  return db;
+  return ref;
 };
 
 const create = (data) => {
-  return db.add(data);
+  return ref.add(data);
 };
 
 const update = (id, value) => {
-  return db.doc(id).update(value);
+  return ref.doc(id).update(value);
 };
 
 const remove = (id) => {
-  return db.doc(id).delete();
+  return ref.doc(id).delete();
 };
 
 const Servis = {

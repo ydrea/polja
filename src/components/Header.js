@@ -16,8 +16,6 @@ export default function Header() {
   async function handleLogout() {
     await logOut();
 
-    // userHasAuthenticated(false);
-
     history.push("/login");
   }
 
