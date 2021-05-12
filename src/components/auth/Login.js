@@ -43,7 +43,6 @@ const Login = () => {
       }
 
       if (emailError || passwordError) {
-        setState({ emailError, passwordError });
         return false;
       }
 
@@ -54,7 +53,7 @@ const Login = () => {
       event.preventDefault();
       const isValid = validate();
       if (!isValid) {
-        setState(initialState);
+        resetInput();
       }
     };
 
@@ -68,10 +67,10 @@ const Login = () => {
     }
   }
 
-  // const resetInput = () => {
-  //   setEmail("");
-  //   setPassword("");
-  // };
+  const resetInput = () => {
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <>
