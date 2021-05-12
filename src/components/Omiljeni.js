@@ -38,7 +38,7 @@ export default function Omiljeni() {
     setItems(tmp);
     Servis.update(val)
       .then(() => {
-        console.log("kontakt dodan u omiljene");
+        console.log("izmijenili status ovog kontakta");
       })
       .catch((e) => {
         console.log(e);

@@ -22,42 +22,33 @@ const Login = () => {
       });
   };
 
-  // validate
   async function handleSubmit(event) {
     event.preventDefault();
+    // const validate = () => {
+    //   let emailError = "";
+    //   let passwordError = "";
 
-    const validate = () => {
-      let emailError = "";
-      let passwordError = "";
+    if (
+      !password.length > 5 &&
+      !password.match(/\d+/g) &&
+      !password.string.test("+", "-", "!", "#", "$")
+    ) {
+      setPasswordError =
+        "lozinka mora imati min. 6 znakova, od kojih barem jedan broj i jedan od simbola: + - ! # $";
 
-      if (
-        !password.length > 5 &&
-        !password.match(/\d+/g) &&
-        !password.string.test("+", "-", "!", "#", "$")
-      ) {
-        setPasswordError = "password too weak";
-      }
+      alert({ passwordError });
+    }
 
-      if (!email.includes("@")) {
-        setEmailError = "invalid email";
-      }
+    if (!email.includes("@")) {
+      setEmailError = "unesite ispravnu email adresu";
 
-      if (emailError || passwordError) {
-        return false;
-      }
+      alert({ emailError });
+    }
 
-      return true;
-    };
-
-    handleSubmit = (event) => {
-      event.preventDefault();
-      const isValid = validate();
-      if (!isValid) {
-        resetInput();
-      }
-    };
-
-    //
+    if (emailError || passwordError) {
+      resetInput();
+      // return false;
+    }
 
     try {
       await login(email, password);
@@ -90,7 +81,6 @@ const Login = () => {
         <button className="btn primary" onClick={handleSubmit}>
           Login
         </button>
-        {/* <button onClick={logOut}>Log Out</button> */}
       </div>
     </>
   );
