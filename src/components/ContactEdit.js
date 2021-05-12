@@ -149,6 +149,7 @@ class ContactEdit extends React.Component {
                   checked={this.state.daLje}
                   onChange={this.onChangeDalje}
                 />
+                <label>Ako zelite unijeti kontakt...</label>
               </div>
             </div>
             {this.state.daLje ? (

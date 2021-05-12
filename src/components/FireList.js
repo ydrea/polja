@@ -17,12 +17,11 @@ const PAGER = {
 
 export default function FireList() {
   const [items, setItems] = useState([]);
-  const [itemS, setItemS] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sortBy, setSortBy] = useState("Prezime A-Z");
   const [displayMax, setDisplayMax] = useState("max 5");
   const [searchTerm, setSearchTerm] = useState("");
-
+  const [searchResults, setSearchResults] = useState([]);
   //fav box
   const icon = React.createElement("i", { className: "mdi mdi-check" });
   const newIcon = React.cloneElement(icon, {
@@ -68,37 +67,48 @@ export default function FireList() {
   };
 
   //search
-  const handleSearch = (event) => {
-    event.preventDefault();
-    setSearchTerm(event.target.value);
-    findEm();
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
   };
 
-  const refSearch = firebase
-    .firestore()
-    .collection("polja")
-    .where("Ime" || "Prezime" || "Kontakt", ">=", searchTerm);
-  console.log(searchTerm);
-  const findEm = () => {
-    setLoading(true);
-    refSearch.get().then((querySnapshot) => {
-      const itemS = [];
-      querySnapshot.forEach((doc) => {
-        const its = {
-          ...doc.data(),
-          id: doc.id,
-        };
-        itemS.push(its);
-      });
-      setItemS(itemS);
-      console.log(itemS);
-      setLoading(false);
-    });
-  };
+  useEffect(() => {
+    const results = items.filter((tmp) =>
+      tmp.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  // const handleSearch = (event) => {
+  //   event.preventDefault();
+  //   setSearchTerm(event.target.value);
+  //   findEm();
+  // };
+
+  // const refSearch = firebase
+  //   .firestore()
+  //   .collection("polja")
+  //   .where("Ime" || "Prezime" || "Kontakt", ">=", searchTerm);
+  // console.log(searchTerm);
+  // const findEm = () => {
+  //   setLoading(true);
+  //   refSearch.get().then((querySnapshot) => {
+  //     const itemS = [];
+  //     querySnapshot.forEach((doc) => {
+  //       const its = {
+  //         ...doc.data(),
+  //         id: doc.id,
+  //       };
+  //       itemS.push(its);
+  //     });
+  //     setItemS(itemS);
+  //     console.log(itemS);
+  //     setLoading(false);
+  //   });
+  // };
   // //
   useEffect(() => {
     getEm();
-  }, [sortBy, displayMax, searchTerm]);
+  }, [sortBy, displayMax]);
   // //
 
   return (
@@ -163,7 +173,7 @@ export default function FireList() {
               </p>
             </div>
           ))
-        : itemS.map((val) => (
+        : items.map((val) => (
             <div className="container" key={val.id}>
               <p>
                 {val.Ime} {val.Prezime}

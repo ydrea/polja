@@ -5,6 +5,9 @@ import { useHistory } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
   const history = useHistory();
 
   const login = () => {
@@ -19,9 +22,43 @@ const Login = () => {
       });
   };
 
-  // const logOut = () => {
+  // validate
   async function handleSubmit(event) {
     event.preventDefault();
+
+    const validate = () => {
+      let emailError = "";
+      let passwordError = "";
+
+      if (
+        !password.length > 5 &&
+        !password.match(/\d+/g) &&
+        !password.string.test("+", "-", "!", "#", "$")
+      ) {
+        setPasswordError = "password too weak";
+      }
+
+      if (!email.includes("@")) {
+        setEmailError = "invalid email";
+      }
+
+      if (emailError || passwordError) {
+        setState({ emailError, passwordError });
+        return false;
+      }
+
+      return true;
+    };
+
+    handleSubmit = (event) => {
+      event.preventDefault();
+      const isValid = validate();
+      if (!isValid) {
+        setState(initialState);
+      }
+    };
+
+    //
 
     try {
       await login(email, password);
@@ -30,13 +67,11 @@ const Login = () => {
       alert(e.message);
     }
   }
-  //   firebase.auth().signOut();
-  // };
 
-  const resetInput = () => {
-    setEmail("");
-    setPassword("");
-  };
+  // const resetInput = () => {
+  //   setEmail("");
+  //   setPassword("");
+  // };
 
   return (
     <>
