@@ -1,0 +1,102 @@
+.container {
+  justify-content: left;
+  align-items: left;
+  max-width: 500px;
+  padding: 0 30px;
+  margin: 10px auto;
+}
+
+.btn-secondary, .btn-primary {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 8px 20px;
+  margin: 3px;
+}
+.btn-secondary:hover, .btn-primary:hover {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: #450645;
+  color: #eafa0a;
+}
+
+.btn-secondary {
+  background-color: #eafa0a;
+  color: #eafa0a;
+}
+
+@media (max-width: 700px) {
+  .showcase {
+    height: 400px;
+  }
+  .showcase-content {
+    text-align: center;
+  }
+  .showcase-content img {
+    display: none;
+  }
+}
+.App {
+  text-align: center;
+}
+
+body {
+  background-color: #ebebe0;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+img {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.App-header {
+  background-color: #160216;
+  color: #eafa0a;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #ebebe0;
+}
+.App-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.App-header nav ul {
+  display: flex;
+  list-style-type: none;
+}
+.App-header nav li {
+  padding: 15px;
+}
+.App-header nav a {
+  color: #eafa0a;
+}
+.App-header nav a:hover {
+  color: #eafa0a;
+}
+.App-header-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+.App-header-content img {
+  width: 50%;
+}
+.App-header-content h1 {
+  font-size: 50px;
+  line-height: 1.2;
+}
+
+/*# sourceMappingURL=style.css.map */

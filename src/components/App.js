@@ -1,4 +1,4 @@
-// import "./App.css";
+import "../CSS/style.css";
 import "firebase/firestore";
 import "firebase/auth";
 import firebase from "./firebase";
@@ -24,8 +24,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <div className="App">
-          login
-          <div>
+          <div className="container">
             <Header />
           </div>
           <Route path="/adresar" component={FireList} />

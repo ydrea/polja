@@ -119,20 +119,15 @@ export default function ContactUpdate(props) {
               <label>Status: </label>
             </div>
           </form>
-
-          <button onClick={deleteItem}>Delete</button>
-          <p>{message}</p>
-
           <button type="submit" onClick={updateItem}>
             Update
           </button>
           <p>{message}</p>
+          <button onClick={deleteItem}>Delete</button>
+          <p>{message}</p>
         </div>
       ) : (
-        <div>
-          <br />
-          <p>Odaberi jedan broj...</p>
-        </div>
+        <div>Odaberi ako zelis urediti...</div>
       )}{" "}
     </div>
   );

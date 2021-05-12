@@ -1,0 +1,20 @@
+// _config.scss
+$font-stack: Arial, Helvetica, sans-serif;
+$light-color: #ebebe0;
+$primary-color: rgb(22, 2, 22);
+$secondary-color: #eafa0a;
+
+// nav colors based on bg
+@function set-text-color($color) {
+  @if (lightness($color) > 70) {
+    @return $primary-color;
+  } @else {
+    @return $secondary-color;
+  }
+}
+
+// background & text color
+@mixin set-background($color) {
+  background-color: $color;
+  color: set-text-color($color);
+}

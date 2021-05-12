@@ -53,7 +53,9 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           placeholder="password"
         />
-        <button onClick={handleSubmit}>Login</button>
+        <button className="btn primary" onClick={handleSubmit}>
+          Login
+        </button>
         {/* <button onClick={logOut}>Log Out</button> */}
       </div>
     </>

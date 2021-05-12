@@ -20,21 +20,25 @@ export default function Header() {
   }
 
   return (
-    <div>
+    <div className="App-header">
       {currentUserEmail ? (
-        <div>
-          <button onClick={handleLogout}>Log Out</button>
+        <div className="container">
+          <button className="btn-primary" onClick={handleLogout}>
+            Log Out
+          </button>
           {`Welcome ${currentUserEmail}`}
-
-          <div>
-            <Link to="/kontakt">Kontakt</Link>
-          </div>
-          <div>
-            <Link to="/adresar">Adresar</Link>
-          </div>
-          <div>
-            <Link to="/omiljeni">Omiljeni</Link>
-          </div>
+          <nav>
+            {" "}
+            <div>
+              <Link to="/kontakt">Kontakt</Link>
+            </div>
+            <div>
+              <Link to="/adresar">Adresar</Link>
+            </div>
+            <div>
+              <Link to="/omiljeni">Omiljeni</Link>
+            </div>
+          </nav>
         </div>
       ) : (
         <Login />

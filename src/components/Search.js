@@ -16,17 +16,17 @@ export default function Search({ items }) {
     });
   }
   //
-  // const seaRch = (items) => {
-  //   let tmp = searchResults.filter((items) => items.includes(searchTerm));
-  //   console.log(tmp);
-  //   setSearchResults(items);
-  // };
+  const seaRch = (items) => {
+    let tmp = searchResults.filter((items) => items.includes(searchTerm));
+    console.log(tmp);
+    setSearchResults(items);
+  };
   // //
 
   // //
 
   useEffect(() => {
-    // seaRch();
+    seaRch();
   }, [searchTerm]);
   // //
   return (

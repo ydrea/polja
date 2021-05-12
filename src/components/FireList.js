@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import firebase from "./firebase";
 import { Link } from "react-router-dom";
-// import "../sCSS";
+import { Checkbox } from "pretty-checkbox-react";
+import "@djthoms/pretty-checkbox";
 
 const SORTER = {
   "Prezime A-Z": { column: "Prezime", direction: "asc" },
@@ -22,6 +23,13 @@ export default function FireList() {
   const [displayMax, setDisplayMax] = useState("max 5");
   const [searchTerm, setSearchTerm] = useState("");
 
+  //fav box
+  const icon = React.createElement("i", { className: "mdi mdi-check" });
+  const newIcon = React.cloneElement(icon, {
+    ...icon.props,
+    // merge classNames with icon
+    className: icon.props.className + " icon",
+  });
   //list
   const ref = firebase
     .firestore()
@@ -69,9 +77,7 @@ export default function FireList() {
   const refSearch = firebase
     .firestore()
     .collection("polja")
-    .where("Ime", ">=", searchTerm);
-  // .where("Prezime", ">=", searchTerm)
-  // .where("Kontakt", ">=", searchTerm)
+    .where("Ime" || "Prezime" || "Kontakt", ">=", searchTerm);
   console.log(searchTerm);
   const findEm = () => {
     setLoading(true);
@@ -97,32 +103,31 @@ export default function FireList() {
 
   return (
     <div>
-      <div>
-        {" "}
-        <label>Poredaj</label>
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.currentTarget.value)}
-        >
-          <option value="Prezime A-Z"> Prezime A-Z </option>
-          <option value="Prezime Z-A"> Prezime Z-A </option>
-          <option value="Email A-Z"> Email A-Z </option>
-        </select>
-      </div>
-      <div>
-        <label> Max. po stranici </label>
-        <select
-          value={displayMax}
-          onChange={(e) => setDisplayMax(e.currentTarget.value)}
-        >
-          <option value="max 5">5</option>
-          <option value="max 30">30</option>
-          <option value="max 45">45</option>
-        </select>
-      </div>
-      <div>
-        <div>srch</div>
-        <ul>
+      <div className="container">
+        <div>
+          {" "}
+          <label>Poredaj</label>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.currentTarget.value)}
+          >
+            <option value="Prezime A-Z"> Prezime A-Z </option>
+            <option value="Prezime Z-A"> Prezime Z-A </option>
+            <option value="Email A-Z"> Email A-Z </option>
+          </select>
+        </div>
+        <div>
+          <label> Max. po stranici </label>
+          <select
+            value={displayMax}
+            onChange={(e) => setDisplayMax(e.currentTarget.value)}
+          >
+            <option value="max 5">5</option>
+            <option value="max 30">30</option>
+            <option value="max 45">45</option>
+          </select>
+        </div>
+        <div>
           <input
             type="text"
             placeholder="Trazi"
@@ -130,37 +135,39 @@ export default function FireList() {
             value={searchTerm}
             onChange={handleSearch}
           ></input>
-        </ul>
+        </div>
       </div>
       {loading ? <h1>Loading...</h1> : null}
 
       {!searchTerm
         ? items.map((val) => (
-            <div key={val.id}>
+            <div className="container" key={val.id}>
               <p>
                 {
-                  <div className="pretty p-image p-plain">
-                    <input
-                      type="checkbox"
-                      value={val.favorite}
-                      onChange={() => addFav(val)}
-                    />
-                    <div className="state">
-                      <img className="image" src="../sCSS/star-16.png" />
-                      <label> </label>
-                    </div>
-                  </div>
+                  <Checkbox
+                    className="pretty p-image p-plain"
+                    name="tac"
+                    // value="" {...val.favorite}
+                    value={val.favorite}
+                    onChange={() => addFav(val)}
+                    icon={
+                      <img
+                        src="https://cdn.nohat.cc/thumb/f/720/m2i8H7H7G6m2d3b1.jpg"
+                        alt="i"
+                      />
+                    }
+                  />
                 }
                 {val.Ime} {val.Prezime} {val.favorite.toString()}
-                <Link to={`/kontakt/detalji/${val.id}`}> ajd </Link>
+                <Link to={`/kontakt/detalji/${val.id}`}> detalji </Link>
               </p>
             </div>
           ))
         : itemS.map((val) => (
-            <div key={val.id}>
+            <div className="container" key={val.id}>
               <p>
                 {val.Ime} {val.Prezime}
-                <Link to={`/kontakt/detalji/${val.id}`}> ajd </Link>
+                <Link to={`/kontakt/detalji/${val.id}`}> detalji </Link>
               </p>
             </div>
           ))}
